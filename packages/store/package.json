@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "exports": {
-    "./useBalance": "./src/hooks/useBalance"
-},
+    "./useBalance": "./src/hooks/useBalance.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
