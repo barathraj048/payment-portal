@@ -1,14 +1,10 @@
-'use client'
-import React from 'react'
-import { useBalance } from '@repo/store/useBalance'
+"use client";
 
-function Balance() {
-   const balance =useBalance()
-  return (
-    <div>
-      hi this is balance {balance}
-    </div>
-  )
+import { useBalance } from "@repo/store/useBalance";
+
+export default function() {
+  const balance = useBalance();
+  return <div>
+    hi there {balance}
+  </div>
 }
-
-export default Balance

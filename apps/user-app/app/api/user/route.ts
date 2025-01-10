@@ -7,7 +7,10 @@ export const GET=async ()=> {
    await client.user.create({
       data:{
          email:"kljsdjvniijkfvnkjvvvnj",
-         name:"ieijvfj"
+         name:"ieijvfj",
+         number:'83449898',
+         password:"kncclknlknckjn"
+
       }
    })
    return NextResponse.json({

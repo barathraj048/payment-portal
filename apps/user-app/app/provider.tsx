@@ -8,7 +8,6 @@ function Provider({ children }:{
   return ( <RecoilRoot>
    {children}
   </RecoilRoot>
-
   )
 }
 

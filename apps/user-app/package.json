@@ -13,7 +13,10 @@
   "dependencies": {
     "@repo/db": "*",
     "@repo/ui": "*",
+    "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1",
     "next": "^15.1.0",
+    "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recoil": "^0.7.7"
