@@ -1,9 +1,14 @@
 import db from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID !,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -51,9 +56,16 @@ export const authOptions = {
   ],
   secret: process.env.JWT_SECRET,
   callbacks: {
-    async session({ token, session }: any) {
+    async session({ token, session, account, profile }: any) {
       session.user.id = token.sub;
+      if (account.provider === "google") {
+        if (profile.email_verified && profile.email.endsWith("@example.com")) {
+          return session; 
+        } else {
+          return null;
+        }
+      }
       return session;
     },
-  },
+  },  
 };
