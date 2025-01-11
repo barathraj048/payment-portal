@@ -56,16 +56,22 @@ export const authOptions = {
   ],
   secret: process.env.JWT_SECRET,
   callbacks: {
-    async session({ token, session, account, profile }: any) {
-      session.user.id = token.sub;
-      if (account.provider === "google") {
-        if (profile.email_verified && profile.email.endsWith("@example.com")) {
-          return session; 
+    async session({ session, token }: any) {
+      if (!token) {
+        return session; 
+      }
+  
+      session.user.id = token.sub; 
+      if (token.provider === "google") {
+        if (token.email_verified && token.email.endsWith("@example.com")) {
+          return session;
         } else {
-          return null;
+          return null; 
         }
       }
-      return session;
+  
+      return session; 
     },
-  },  
+  },
+    
 };
