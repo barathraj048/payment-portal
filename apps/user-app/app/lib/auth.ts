@@ -60,7 +60,6 @@ export const authOptions = {
       if (!token) {
         return session; 
       }
-  
       session.user.id = token.sub; 
       if (token.provider === "google") {
         if (token.email_verified && token.email.endsWith("@example.com")) {
@@ -69,7 +68,6 @@ export const authOptions = {
           return null; 
         }
       }
-  
       return session; 
     },
   },

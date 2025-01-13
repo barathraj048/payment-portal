@@ -1,0 +1,21 @@
+{
+  "name": "bank-webhook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js && node dist/index.js",
+    "build" :"esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.24.2",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0"
+  }
+}
