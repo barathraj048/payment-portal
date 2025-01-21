@@ -7,7 +7,11 @@
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
-    "./nav": "./src/navbar.tsx"
+    "./nav": "./src/navbar.tsx",
+    "./appbar": "./src/Appbar.tsx",
+    "./Select" : "./src/Select.tsx",
+    "./Center" : "./src/Center.tsx",
+    "./TextInput" : "./src/TextInput.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
