@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "esbuild": "^0.24.2",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "@repo/db": "*"
   },
   "devDependencies": {
     "@types/express": "^5.0.0"
