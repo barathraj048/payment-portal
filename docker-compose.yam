@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  bank-webhook:
+    build:
+      context: ./apps/bank/webhook
+      dockerfile: dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./apps/webhook/src:/app/src   
+      - ./apps/webhook/dist:/app/dist
+    networks:
+      - dev-network
+    environment:
+      NODE_ENV: development
+
+  merchant-app:
+    build:
+      context: ./apps/merchant-app
+      dockerfile: dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./apps/merchant-app:/app
+    networks:
+      - dev-network
+    environment:
+      NODE_ENV: development
+
+  user-app:
+    build:
+      context: ./apps/user-app
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/user-app:/app
+    networks:
+      - dev-network
+    environment:
+      NODE_ENV: development
+
+networks:
+  dev-network:
+    driver: bridge
