@@ -42,12 +42,14 @@ export default async function() {
             Transfer
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 p-4">
-            <div>
+            <div className="mx-1 p-3 rounded-xl bg-white border-b-1">
                 <AddMoney />
             </div>
-            <div>
-                <BalanceCard amount={balance.amount} locked={balance.locked} />
-                <div className="pt-4">
+            <div className="mr-4 ">
+                <div className="p-3 bg-white border-b-1 rounded-xl mb-2">
+                    <BalanceCard amount={balance.amount} locked={balance.locked} />
+                </div>
+                <div className="pt-4 p-3 bg-white border-b-1 rounded-xl">
                     <OnRampTransactions transactions={transactions} />
                 </div>
             </div>
