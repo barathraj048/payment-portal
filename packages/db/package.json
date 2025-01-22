@@ -14,8 +14,13 @@
   },
   "exports": {
     "./client": "./index.ts"
-  },
+  },"prisma": {
+  "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+},
   "devDependencies": {
-    "prisma": "^6.2.1"
-  }
+    "@types/node": "^22.10.7",
+    "prisma": "^6.2.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+}
 }

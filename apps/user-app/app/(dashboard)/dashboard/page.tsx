@@ -1,6 +1,10 @@
+import { getServerSession } from "next-auth"
+import { authOptions } from "../../lib/auth"
 
-export default function() {
+
+export default async function() {
+    let session=await getServerSession(authOptions)
     return <div>
-        Dashboard
+        Dashboard{JSON.stringify(session.user.id)}
     </div>
 }

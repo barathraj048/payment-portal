@@ -5,13 +5,14 @@ import { Center } from "@repo/ui/Center";
 import { Select } from "@repo/ui/Select";
 import { useState } from "react";
 import { TextInput } from "@repo/ui/TextInput";
+import { redirect } from "next/navigation";
 
 const SUPPORTED_BANKS = [{
     name: "HDFC Bank",
-    redirectUrl: "https://netbanking.hdfcbank.com"
+    redirectUrl: "https://google.com"
 }, {
     name: "Axis Bank",
-    redirectUrl: "https://www.axisbank.com/"
+    redirectUrl: "https://google.com"
 }];
 
 export const AddMoney = () => {
@@ -25,14 +26,14 @@ export const AddMoney = () => {
             Bank
         </div>
         <Select onSelect={(value) => {
-            setRedirectUrl(SUPPORTED_BANKS.find(x => x.name === value)?.redirectUrl || "")
+            setRedirectUrl(SUPPORTED_BANKS.find(x => x.name === value)?.redirectUrl ||'https://google.com')
         }} options={SUPPORTED_BANKS.map(x => ({
             key: x.name,
             value: x.name
         }))} />
         <div className="flex justify-center pt-4">
             <Button onClick={() => {
-                window.location.href = redirectUrl || "";
+                 redirect(redirectUrl || 'https://google.com')
             }}>
             Add Money
             </Button>
