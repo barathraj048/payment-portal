@@ -8,7 +8,6 @@ export default function Layout({
 }): JSX.Element {
   return (
     <div className="flex bg-slate-100 ">
-      <Provider>
         <div className="w-72 border-r border-slate-300 min-h-screen mr-4 pt-28">
             <div>
                 <SidebarItem href={"/dashboard"} icon={<HomeIcon />} title="Home" />
@@ -17,7 +16,6 @@ export default function Layout({
             </div>
         </div>
             {children}
-            </Provider>
     </div>
   );
 }
