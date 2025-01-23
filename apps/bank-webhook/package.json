@@ -3,20 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-"scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js && node dist/index.js",
-    "build" :"esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js"
+    "build": "esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@repo/db": "*",
     "esbuild": "^0.24.2",
-    "express": "^4.21.2",
-    "@repo/db": "*"
+    "express": "^4.21.2"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.9",
+    "typescript": "^5.7.3"
   }
 }
