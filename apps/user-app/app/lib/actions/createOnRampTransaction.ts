@@ -14,23 +14,20 @@ export const CreateOnRampTransaction = async ({
   try {
     const session = await getServerSession(authOptions);
 
-    // Check if user is authenticated
     if (!session?.user) {
       return "Un-authenticated Request";
     }
 
-    // Generate a secure token
-    const token = crypto.randomUUID();
+    const token = (Math.random()*100).toString()
 
-    // Create transaction in database
     await db.onRampTransaction.create({
       data: {
         provider,
         status: "Processing",
         startTime: new Date(),
         token,
-        userId: Number(session.user.id), // Ensure userId is a number
-        amount: amount * 100, // Convert to smallest currency unit
+        userId: Number(session.user.id), 
+        amount: amount * 100,
       },
     });
 

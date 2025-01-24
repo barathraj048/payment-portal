@@ -3,9 +3,16 @@ import db from "@repo/db/client"
 
 const app=express()
 
+app.use(express.json());
+
 app.post('/hdfcbank-handiler',async(req,res)=> {
    //pending Zod validation
-   const paymentInformation={
+   interface PaymentInfo {
+      token: string;
+      id: number;
+      amount: number;
+  }
+   const paymentInformation :PaymentInfo={
       token:req.body.token,
       id:req.body.id,
       amount:req.body.amount

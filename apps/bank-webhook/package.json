@@ -14,7 +14,8 @@
   "dependencies": {
     "@repo/db": "*",
     "esbuild": "^0.24.2",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

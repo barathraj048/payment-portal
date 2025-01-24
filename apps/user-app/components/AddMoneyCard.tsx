@@ -10,11 +10,11 @@ import { CreateOnRampTransaction } from "../app/lib/actions/createOnRampTransact
 const SUPPORTED_BANKS = [
   {
     name: "HDFC Bank",
-    redirectUrl: "https://google.com",
+    redirectUrl: "https://netbanking.hdfcbank.com/netbanking/",
   },
   {
     name: "Axis Bank",
-    redirectUrl: "https://google.com",
+    redirectUrl: "https://www.axisbank.com/bank-smart/internet-banking/getting-started",
   },
 ];
 
@@ -22,6 +22,7 @@ export const AddMoney = () => {
   const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
   const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name);
   const [amount, setAmount] = useState(0);
+  console.log(redirect,provider,amount)
 
   return (
     <Card title="Add Money">
