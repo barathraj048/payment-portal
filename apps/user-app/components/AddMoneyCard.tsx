@@ -44,8 +44,8 @@ export const AddMoney = () => {
           onSelect={(value) => {
             const selectedBank = SUPPORTED_BANKS.find((x) => x.name === value);
             if (selectedBank) {
-              setProvider(selectedBank.name); // Update selected provider
-              setRedirectUrl(selectedBank.redirectUrl); // Update redirect URL
+              setProvider(selectedBank.name);
+              setRedirectUrl(selectedBank.redirectUrl);
             }
           }}
           options={SUPPORTED_BANKS.map((x) => ({
@@ -55,11 +55,10 @@ export const AddMoney = () => {
         />
 
         <div className="flex justify-center pt-4">
-          {/* Add Money Button */}
           <Button
             onClick={async() => {
-              await CreateOnRampTransaction({provider, amount}); // Call transaction function
-              redirect(redirectUrl || "https://google.com"); // Redirect to URL
+              await CreateOnRampTransaction({provider, amount}); 
+              redirect(redirectUrl || ''); 
             }}
           >
             Add Money
