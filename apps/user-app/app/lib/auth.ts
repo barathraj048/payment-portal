@@ -54,7 +54,7 @@ export const authOptions = {
       },
     }),
   ],
-  secret: process.env.JWT_SECRET || "efjnvkjvnlkjvnlkjvnkjjvnljkvflkjfnkl",
+  secret: process.env.JWT_SECRET,
   callbacks: {
     async session({ session, token }: any) {
       if (!token) {

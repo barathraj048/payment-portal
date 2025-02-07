@@ -1,61 +1,68 @@
 'use server'
-
 import prisma from "@repo/db/client"
 import { getServerSession } from "next-auth"
 import { authOptions } from "../auth"
+
 export const P2pTrans = async ({number, amount}: {
-   number: string,
-   amount: number
+  number: string,
+  amount: number
 }) => {
-   const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions)
 
-   if (!session) {
-      return { message: 'Unauthenticated Access' }
-   }
+  if (!session) {
+     return { message: 'Unauthenticated Access' }
+  }
 
-   const sender = await prisma.user.findFirst({
-      where: { id: Number(session.user.id) }
-   })
+  try {
+     const transaction = await prisma.$transaction(async (prisma) => {
 
-   const receiver = await prisma.user.findFirst({
-      where: { number }
-   })
+      await prisma.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(session?.user?.id)} FOR UPDATE`;
 
-   if (!sender || !receiver) {
-      return { message: 'Invalid sender or receiver' }
-   }
+        const sender = await prisma.user.findFirst({
+           where: { id: Number(session.user.id) }
+        })
 
-   const senderBalance = await prisma.balance.findUnique({
-      where: { userId: sender.id }
-   })
+        const receiver = await prisma.user.findFirst({
+           where: { number }
+        })
 
-   const receiverBalance = await prisma.balance.findUnique({
-      where: { userId: receiver.id }
-   })
+        if (!sender || !receiver) {
+           return('Invalid sender or receiver')
+        }
 
-   if (!senderBalance || !receiverBalance) {
-      return { message: 'Invalid balance information' }
-   }
+        const senderBalance = await prisma.balance.findUnique({
+           where: { userId: sender.id }
+        })
 
-   if (senderBalance.amount < amount * 100) {
-      return { message: 'Insufficient balance' }
-   }
+        const receiverBalance = await prisma.balance.findUnique({
+           where: { userId: receiver.id }
+        })
 
-   try {
-      await prisma.$transaction([
-         prisma.balance.update({
-            where: { id: senderBalance.id },
-            data: { amount: { decrement: amount * 100 } }
-         }),
-         prisma.balance.update({
-            where: { id: receiverBalance.id },
-            data: { amount: { increment: amount * 100 } }
-         })
-      ])
+        if (!senderBalance || !receiverBalance) {
+           return('Invalid balance information')
+        }
 
-      return { message: 'Transaction successful' }
-   } catch(error) {
-      console.error('Error in P2P transaction', error)
-      return { message: 'Transaction failed' }
-   }
+        if (senderBalance.amount < amount * 100) {
+           return('Insufficient balance')
+        }
+
+        await prisma.balance.update({
+           where: { id: senderBalance.id },
+           data: { amount: { decrement: amount * 100 } }
+        })
+
+        await prisma.balance.update({
+           where: { id: receiverBalance.id },
+           data: { amount: { increment: amount * 100 } }
+        })
+
+        return { message: 'Transaction successful' }
+     })
+
+     return transaction
+  } catch(error) {
+     return { 
+        message: error instanceof Error ? error.message : 'Transaction failed' 
+     }
+  }
 }
