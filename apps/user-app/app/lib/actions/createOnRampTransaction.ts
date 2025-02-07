@@ -14,7 +14,7 @@ export const CreateOnRampTransaction = async ({
   try {
     const session = await getServerSession(authOptions);
 
-    if (!session?.user) {
+    if (!session?.user || !session || !session.user.id) {
       return "Un-authenticated Request";
     }
 
@@ -33,7 +33,7 @@ export const CreateOnRampTransaction = async ({
 
     return "On-ramp transaction created successfully";
   } catch (error) {
-    console.error("Error while creating on-ramp transaction:", error);
+    console.log("Error while creating on-ramp transaction:", error);
     throw error;
   }
 };
