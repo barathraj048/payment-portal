@@ -12,7 +12,7 @@ export default function PeerToPeer() {
       <div className='bg-white p-4 py-2 border-b-1 rounded'>
          <p className='font-semibold my-2 text-xl'>Send Money To Users</p>
 
-         <TextInput placeholder='Number' label='Number' onChange={(value => setNumber(value ) )}/>
+         <TextInput placeholder='Number' label='Number' onChange={(value => setNumber(value) )}/>
          <TextInput placeholder='Amount' label='Amount' onChange={(value => setAmount(Number(value) ) )}/>
          <div className='flex items-center justify-center my-auto mt-4 mb-6'>
             <Button onClick={async()=> {
