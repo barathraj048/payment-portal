@@ -8,32 +8,44 @@ export const CreateOnRampTransaction = async ({
   provider,
   amount,
 }: {
-  provider: any;
+  provider: string;
   amount: number;
 }) => {
   try {
+    console.log(`provider:${provider},amount:${amount}`);
     const session = await getServerSession(authOptions);
-
-    if (!session?.user || !session || !session.user.id) {
-      return "Un-authenticated Request";
+    
+    if (!session || !provider || !amount) {
+      return {
+        success: false,
+        message: 'Encountering error while processing. Please provide valid info'
+      };
     }
 
-    const token = (Math.random()*100).toString()
-
+    const token = Math.random();
     await db.onRampTransaction.create({
       data: {
         provider,
-        status: "Processing",
+        status: 'Processing',
+        token: token.toString(),
+        amount,
         startTime: new Date(),
-        token,
-        userId: Number(session.user.id), 
-        amount: amount * 100,
-      },
+        userId: session.user.id
+      }
     });
 
-    return "On-ramp transaction created successfully";
+    return {
+      success: true,
+      message: "On-ramp transaction created successfully"
+    };
+
   } catch (error) {
-    console.log("Error while creating on-ramp transaction:", error);
-    throw error;
+    // Properly handle the error object
+    console.error("Error while creating on-ramp transaction:");
+
+    return {
+      success: false,
+      message: "Failed to create transaction"
+    };
   }
 };

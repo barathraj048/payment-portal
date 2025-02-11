@@ -5,6 +5,6 @@ import { authOptions } from "../../lib/auth"
 export default async function() {
     let session :any=await getServerSession(authOptions)
     return <div className="flex">
-        Dashboard of UserName: <p className="font-bold">{JSON.stringify(session.user.name)}</p>
+        Dashboard of UserName: <p className="font-bold">{JSON.stringify(session.user.id)}</p>
     </div>
 }
