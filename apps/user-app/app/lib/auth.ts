@@ -44,7 +44,6 @@ export const authOptions = {
           throw new Error("Invalid phone number or password.");
         }
 
-        // Return user data
         return {
           id: existingUser.id.toString(),
           name: existingUser.name,
@@ -54,7 +53,7 @@ export const authOptions = {
       },
     }),
   ],
-  secret: process.env.JWT_SECRET,
+  secret: process.env.JWT_SECRET || 'ekjfnvlkdvbbkjbvlkajie',
   callbacks: {
     async session({ session, token }: any) {
       if (!token) {
