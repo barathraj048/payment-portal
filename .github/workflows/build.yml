@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - master
+      - main
 
 jobs:
   build:
@@ -19,7 +20,7 @@ jobs:
         run: npm install
 
       - name: run Prism generate
-        run: cd packages/db && npx prisma generate
+        run: npm db-generate
         
       - name: Run Build
         run: npm run build

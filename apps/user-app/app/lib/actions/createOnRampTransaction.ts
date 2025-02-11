@@ -40,8 +40,7 @@ export const CreateOnRampTransaction = async ({
     };
 
   } catch (error) {
-    // Properly handle the error object
-    console.error("Error while creating on-ramp transaction:");
+    console.log("Error while creating on-ramp transaction:");
 
     return {
       success: false,
